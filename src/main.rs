@@ -13,6 +13,7 @@
 //
 
 use std::io;
+use std::collections::HashMap;
 
 struct Employee {
     name: String,
@@ -81,6 +82,23 @@ fn main() {
     //let s1 = String::from("Hello, ");
     //let s2 = String::from("world!");
     //let s3 = s1 + &s2; // note s1 has been moved here and can no longer be used
+    //add (+) second argument is a reference so it stays ok
+    //
+    //iterate over hash map
+    //if deperamentr is not a key add it and set value to the name
+    //otherwise set the value to current name string + , new name string
+
+    let buff = ", ".to_string();
+    let mut map = HashMap::new();
+    //loop over vector adding
+    for i in &employees {
+        let val = map.entry(&i.department).or_insert("".to_string());
+        *val = val.clone() + &buff;
+        *val = val.clone() + &i.name;
+    }
+
+    //print hashmap to debug
+    println!("{map:?}");
 
 
 }
