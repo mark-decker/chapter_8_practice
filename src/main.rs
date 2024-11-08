@@ -3,6 +3,57 @@
 //mark decker
 //Nov 8 2024
 
+//User will input both the Employee Name and the Department
+//Department
+//HashMap: key -> Name Value -> Department
+//Vector of Names
+//Vector of Departments
+//
+//HashMap where key is Department and Value is a vector of Strings?
+//
+
+use std::io;
+
+struct Employee {
+    name: String,
+    department: String,
+}
+
+impl Employee {
+    fn compare_department(&self, other: &Employee) -> bool {
+        self.department == other.department
+    }
+
+}
+
+fn build_employee(name: String, department: String) -> Employee {
+    Employee {
+        name,
+        department,
+    }
+}
+
+
 fn main() {
-    println!("Hello, world!");
+
+    let mut employees: Vec<Employee> = Vec::new();
+
+    let mut name_in = String::new();
+    println!("Please Enter the Employee Name:");
+    io::stdin().read_line(&mut name_in).expect("Failed to read line");
+
+    let mut department_in = String::new();
+
+    println!("Please Enter the Department:");
+    io::stdin().read_line(&mut department_in).expect("Failed to read line");
+
+    println!("{} is in {department_in}",name_in);
+
+    employees.push(build_employee(name_in,department_in));
+
+    for i in &employees {
+        println!("{} -- {}",i.name,i.department);
+    }
+
+
 }
