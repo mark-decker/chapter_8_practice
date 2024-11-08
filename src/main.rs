@@ -33,27 +33,54 @@ fn build_employee(name: String, department: String) -> Employee {
     }
 }
 
-
 fn main() {
 
     let mut employees: Vec<Employee> = Vec::new();
 
-    let mut name_in = String::new();
-    println!("Please Enter the Employee Name:");
-    io::stdin().read_line(&mut name_in).expect("Failed to read line");
+    let mut stop: bool = false;
+    
+    while stop == false { //loop to allow multiple name, department to be input
 
-    let mut department_in = String::new();
+        let mut department_in = String::new();
+        let mut name_in = String::new();
 
-    println!("Please Enter the Department:");
-    io::stdin().read_line(&mut department_in).expect("Failed to read line");
+        //put into a loop to enter many names and departments, use keyword to stop
+        //
+        println!("Please Enter the Employee Name:");
+        io::stdin().read_line(&mut name_in).expect("Failed to read line");
+        //need to strip off /n
+        name_in.pop();
 
-    println!("{} is in {department_in}",name_in);
+        if name_in.len() == 0 {
+            stop = true;
+            break
+        }
 
-    employees.push(build_employee(name_in,department_in));
+        println!("Please Enter the Department:");
+        io::stdin().read_line(&mut department_in).expect("Failed to read line");
+        department_in.pop();  
+
+        if name_in.len() == 0 {
+            stop = true;
+            break
+        }
+
+        println!("{} is in {department_in}",name_in);
+
+        employees.push(build_employee(name_in,department_in));
+
+    }
 
     for i in &employees {
         println!("{} -- {}",i.name,i.department);
     }
+
+    //create a hashmap from the vector using department as key, assing names to a comma sperated
+    //list
+
+    //let s1 = String::from("Hello, ");
+    //let s2 = String::from("world!");
+    //let s3 = s1 + &s2; // note s1 has been moved here and can no longer be used
 
 
 }
