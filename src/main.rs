@@ -88,13 +88,16 @@ fn main() {
     //if deperamentr is not a key add it and set value to the name
     //otherwise set the value to current name string + , new name string
 
-    let buff = ", ".to_string();
+    //let buff = ", ".to_string();
     let mut map = HashMap::new();
     //loop over vector adding
     for i in &employees {
-        let val = map.entry(&i.department).or_insert("".to_string());
-        *val = val.clone() + &buff;
-        *val = val.clone() + &i.name;
+        //let val = map.entry(&i.department).or_insert("".to_string());
+        //*val = val.clone() + &buff;
+        //*val = val.clone() + &i.name;
+        //store as a vec of names
+        let val = map.entry(&i.department).or_insert(Vec::new());
+        val.push(&i.name);
     }
 
     //print hashmap to debug
